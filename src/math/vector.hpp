@@ -2,6 +2,7 @@
 #include <type_traits>
 #include <concepts>
 #include <cmath>
+#include <ostream>
 
 namespace dziekan{
     // Concept encapsulating all numbers (floats, doubles, ints, long longs, etc)
