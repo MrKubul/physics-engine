@@ -11,8 +11,8 @@ namespace dziekan{
 
     template<arithmetic T>
     struct Base_vec{
-        inline const virtual T mag_sq() const = 0;
-        inline const T mag() const { return std::sqrt(mag_sq()); };
+        inline virtual T mag_sq() const = 0;
+        inline T mag() const { return std::sqrt(mag_sq()); };
     };
 
 
@@ -24,10 +24,10 @@ namespace dziekan{
         T x;
         T y;
 
-        inline const T mag_sq() const { return x * x + y * y; }
-        inline const T dot(const Vec2 &rhs) const { return x * rhs.x + y * rhs.y; }
-        inline const Vec2<T> norm() const { return Vec2<T>(x/Vec2<T>::mag(), y/Vec2<T>::mag()); }
-        inline const Vec2<T> perp() const { return Vec2<T>(-y, x); }
+        inline T mag_sq() const { return x * x + y * y; }
+        inline T dot(const Vec2 &rhs) const { return x * rhs.x + y * rhs.y; }
+        inline Vec2<T> norm() const { return Vec2<T>(x/Vec2<T>::mag(), y/Vec2<T>::mag()); }
+        inline Vec2<T> perp() const { return Vec2<T>(-y, x); }
     };
 
 
@@ -41,9 +41,9 @@ namespace dziekan{
         T y;
         T z;
 
-        inline const T mag_sq() const { return x * x + y * y + z * z; }
-        inline const T dot(const Vec3<T> &rhs) const { return x * rhs.x + y * rhs.y + z * rhs.z; }
-        inline const Vec3<T> norm() const { return Vec3<T>(x/Vec3<T>::mag(), y/Vec3<T>::mag(), z/Vec3<T>::mag()); }
+        inline T mag_sq() const { return x * x + y * y + z * z; }
+        inline T dot(const Vec3<T> &rhs) const { return x * rhs.x + y * rhs.y + z * rhs.z; }
+        inline Vec3<T> norm() const { return Vec3<T>(x/Vec3<T>::mag(), y/Vec3<T>::mag(), z/Vec3<T>::mag()); }
     };
 
 
@@ -58,9 +58,9 @@ namespace dziekan{
         T z;
         T w;
 
-        inline const T mag_sq() const { return x * x + y * y + z * z + w * w; }
-        inline const T dot(const Vec4<T> &rhs) const { return x * rhs.x + y * rhs.y + z * rhs.z + w * rhs.w; }
-        inline const Vec4<T> norm() const { return Vec4<T>(x/Vec4<T>::mag(), y/Vec4<T>::mag(), z/Vec4<T>::mag(), w/Vec4<T>::mag()); }
+        inline T mag_sq() const {return x * x + y * y + z * z + w * w; }
+        inline T dot(const Vec4<T> &rhs) const { return x * rhs.x + y * rhs.y + z * rhs.z + w * rhs.w; }
+        inline Vec4<T> norm() const { return Vec4<T>(x/Vec4<T>::mag(), y/Vec4<T>::mag(), z/Vec4<T>::mag(), w/Vec4<T>::mag()); }
     };
 
     typedef Vec2<int> Vec2i;
