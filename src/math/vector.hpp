@@ -4,7 +4,7 @@
 #include <cmath>
 #include <ostream>
 
-namespace dziekan{
+namespace deen{
     // Concept encapsulating all numbers (floats, doubles, ints, long longs, etc)
     template<typename T>
     concept arithmetic = std::is_arithmetic_v<T>;
