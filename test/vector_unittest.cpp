@@ -1,258 +1,303 @@
 #include "../src/math/vector.hpp"
 #include <gtest/gtest.h>
 
+using vector_types_to_test = testing::Types<int, double, long long>;
 
+template<dziekan::arithmetic T>
 class VectorTest : public ::testing::Test {
     protected:
-        double a1 = 1;
-        double a2 = 2;
-        double a3 = 3;
-        double a4 = 4;
-        double b1 = 5;
-        double b2 = 6;
-        double b3 = 7;
-        double b4 = 8;
+        T a1 = 1;
+        T a2 = 2;
+        T a3 = 3;
+        T a4 = 4;
+        T b1 = 5;
+        T b2 = 6;
+        T b3 = 7;
+        T b4 = 8;
 };
 
-TEST_F(VectorTest, testing_vec2_plus)
+TYPED_TEST_SUITE(VectorTest, vector_types_to_test);
+
+TYPED_TEST(VectorTest, testing_vec2_plus)
 {
-    dziekan::Vec2d x(a1, a2), y(b1, b2);
-    dziekan::Vec2d z = x + y;
-    EXPECT_EQ(z.x, a1 + b1);
-    EXPECT_EQ(z.y, a2 + b2);
+    dziekan::Vector2<TypeParam> x(this->a1, this->a2), y(this->b1, this->b2);
+    dziekan::Vector2<TypeParam> z = x + y;
+    EXPECT_EQ(z.x, this->a1 + this->b1);
+    EXPECT_EQ(z.y, this->a2 + this->b2);
 }
 
-TEST_F(VectorTest, testing_vec2_plusequals)
+TYPED_TEST(VectorTest, testing_vec2_plusequals)
 {
-    dziekan::Vec2d x(a1, a2), y(b1, b2);
+    dziekan::Vector2<TypeParam> x(this->a1, this->a2), y(this->b1, this->b2);
     x += y;
-    EXPECT_EQ(x.x, a1 + b1);
-    EXPECT_EQ(x.y, a2 + b2);
+    EXPECT_EQ(x.x, this->a1 + this->b1);
+    EXPECT_EQ(x.y, this->a2 + this->b2);
 }
 
-TEST_F(VectorTest, testing_vec3_plus)
+TYPED_TEST(VectorTest, testing_vec3_plus)
 {
-    dziekan::Vec3d x(a1, a2, a3), y(b1, b2, b3);
-    dziekan::Vec3d z = x + y;
-    EXPECT_EQ(z.x, a1 + b1);
-    EXPECT_EQ(z.y, a2 + b2);
-    EXPECT_EQ(z.z, a3 + b3);
+    dziekan::Vector3<TypeParam> x(this->a1, this->a2, this->a3), y(this->b1, this->b2, this->b3);
+    dziekan::Vector3<TypeParam> z = x + y;
+    EXPECT_EQ(z.x, this->a1 + this->b1);
+    EXPECT_EQ(z.y, this->a2 + this->b2);
+    EXPECT_EQ(z.z, this->a3 + this->b3);
 }
 
-TEST_F(VectorTest, testing_vec3_plusequals)
+TYPED_TEST(VectorTest, testing_vec3_plusequals)
 {
-    dziekan::Vec3d x(a1, a2, a3), y(b1, b2, b3);
+    dziekan::Vector3<TypeParam> x(this->a1, this->a2, this->a3), y(this->b1, this->b2, this->b3);
     x += y;
-    EXPECT_EQ(x.x, a1 + b1);
-    EXPECT_EQ(x.y, a2 + b2);
-    EXPECT_EQ(x.z, a3 + b3);
+    EXPECT_EQ(x.x, this->a1 + this->b1);
+    EXPECT_EQ(x.y, this->a2 + this->b2);
+    EXPECT_EQ(x.z, this->a3 + this->b3);
 }
 
-TEST_F(VectorTest, testing_vec4_plus)
+TYPED_TEST(VectorTest, testing_vec4_plus)
 {
-    dziekan::Vec4d x(a1, a2, a3, a4), y(b1, b2, b3, b4);
-    dziekan::Vec4d z = x + y;
-    EXPECT_EQ(z.x, a1 + b1);
-    EXPECT_EQ(z.y, a2 + b2);
-    EXPECT_EQ(z.z, a3 + b3);
-    EXPECT_EQ(z.w, a4 + b4);
+    dziekan::Vector4<TypeParam> x(this->a1, this->a2, this->a3, this->a4), y(this->b1, this->b2, this->b3, this->b4);
+    dziekan::Vector4<TypeParam> z = x + y;
+    EXPECT_EQ(z.x, this->a1 + this->b1);
+    EXPECT_EQ(z.y, this->a2 + this->b2);
+    EXPECT_EQ(z.z, this->a3 + this->b3);
+    EXPECT_EQ(z.w, this->a4 + this->b4);
 }
 
-TEST_F(VectorTest, testing_vec4_plusequals)
+TYPED_TEST(VectorTest, testing_vec4_plusequals)
 {
-    dziekan::Vec4d x(a1, a2, a3, a4), y(b1, b2, b3, b4);
+    dziekan::Vector4<TypeParam> x(this->a1, this->a2, this->a3, this->a4), y(this->b1, this->b2, this->b3, this->b4);
     x += y;
-    EXPECT_EQ(x.x, a1 + b1);
-    EXPECT_EQ(x.y, a2 + b2);
-    EXPECT_EQ(x.z, a3 + b3);
-    EXPECT_EQ(x.w, a4 + b4);
+    EXPECT_EQ(x.x, this->a1 + this->b1);
+    EXPECT_EQ(x.y, this->a2 + this->b2);
+    EXPECT_EQ(x.z, this->a3 + this->b3);
+    EXPECT_EQ(x.w, this->a4 + this->b4);
 }
 
-TEST_F(VectorTest, testing_vec2_minus)
+TYPED_TEST(VectorTest, testing_vec2_minus)
 {
-    dziekan::Vec2d x(a1, a2), y(b1, b2);
-    dziekan::Vec2d z = x - y;
-    EXPECT_EQ(z.x, a1 - b1);
-    EXPECT_EQ(z.y, a2 - b2);
+    dziekan::Vector2<TypeParam> x(this->a1, this->a2), y(this->b1, this->b2);
+    dziekan::Vector2<TypeParam> z = x - y;
+    EXPECT_EQ(z.x, this->a1 - this->b1);
+    EXPECT_EQ(z.y, this->a2 - this->b2);
 }
 
-TEST_F(VectorTest, testing_vec2_minusequals)
+TYPED_TEST(VectorTest, testing_vec2_minusequals)
 {
-    dziekan::Vec2d x(a1, a2), y(b1, b2);
+    dziekan::Vector2<TypeParam> x(this->a1, this->a2), y(this->b1, this->b2);
     x -= y;
-    EXPECT_EQ(x.x, a1 - b1);
-    EXPECT_EQ(x.y, a2 - b2);
+    EXPECT_EQ(x.x, this->a1 - this->b1);
+    EXPECT_EQ(x.y, this->a2 - this->b2);
 }
 
-TEST_F(VectorTest, testing_vec3_minus)
+TYPED_TEST(VectorTest, testing_vec3_minus)
 {
-    dziekan::Vec3d x(a1, a2, a3), y(b1, b2, b3);
-    dziekan::Vec3d z = x - y;
-    EXPECT_EQ(z.x, a1 - b1);
-    EXPECT_EQ(z.y, a2 - b2);
-    EXPECT_EQ(z.z, a3 - b3);
+    dziekan::Vector3<TypeParam> x(this->a1, this->a2, this->a3), y(this->b1, this->b2, this->b3);
+    dziekan::Vector3<TypeParam> z = x - y;
+    EXPECT_EQ(z.x, this->a1 - this->b1);
+    EXPECT_EQ(z.y, this->a2 - this->b2);
+    EXPECT_EQ(z.z, this->a3 - this->b3);
 }
 
-TEST_F(VectorTest, testing_vec3_minusequals)
+TYPED_TEST(VectorTest, testing_vec3_minusequals)
 {
-    dziekan::Vec3d x(a1, a2, a3), y(b1, b2, b3);
+    dziekan::Vector3<TypeParam> x(this->a1, this->a2, this->a3), y(this->b1, this->b2, this->b3);
     x -= y;
-    EXPECT_EQ(x.x, a1 - b1);
-    EXPECT_EQ(x.y, a2 - b2);
-    EXPECT_EQ(x.z, a3 - b3);
+    EXPECT_EQ(x.x, this->a1 - this->b1);
+    EXPECT_EQ(x.y, this->a2 - this->b2);
+    EXPECT_EQ(x.z, this->a3 - this->b3);
 }
 
-TEST_F(VectorTest, testing_vec4_minus)
+TYPED_TEST(VectorTest, testing_vec4_minus)
 {
-    dziekan::Vec4d x(a1, a2, a3, a4), y(b1, b2, b3, b4);
-    dziekan::Vec4d z = x - y;
-    EXPECT_EQ(z.x, a1 - b1);
-    EXPECT_EQ(z.y, a2 - b2);
-    EXPECT_EQ(z.z, a3 - b3);
-    EXPECT_EQ(z.w, a4 - b4);
+    dziekan::Vector4<TypeParam> x(this->a1, this->a2, this->a3, this->a4), y(this->b1, this->b2, this->b3, this->b4);
+    dziekan::Vector4<TypeParam> z = x - y;
+    EXPECT_EQ(z.x, this->a1 - this->b1);
+    EXPECT_EQ(z.y, this->a2 - this->b2);
+    EXPECT_EQ(z.z, this->a3 - this->b3);
+    EXPECT_EQ(z.w, this->a4 - this->b4);
 }
 
-TEST_F(VectorTest, testing_vec4_minusequals)
+TYPED_TEST(VectorTest, testing_vec4_minusequals)
 {
-    dziekan::Vec4d x(a1, a2, a3, a4), y(b1, b2, b3, b4);
+    dziekan::Vector4<TypeParam> x(this->a1, this->a2, this->a3, this->a4), y(this->b1, this->b2, this->b3, this->b4);
     x -= y;
-    EXPECT_EQ(x.x, a1 - b1);
-    EXPECT_EQ(x.y, a2 - b2);
-    EXPECT_EQ(x.z, a3 - b3);
-    EXPECT_EQ(x.w, a4 - b4);
+    EXPECT_EQ(x.x, this->a1 - this->b1);
+    EXPECT_EQ(x.y, this->a2 - this->b2);
+    EXPECT_EQ(x.z, this->a3 - this->b3);
+    EXPECT_EQ(x.w, this->a4 - this->b4);
 }
 
-TEST_F(VectorTest, testing_vec2_multiply)
+TYPED_TEST(VectorTest, testing_vec2_multiply)
 {
-    dziekan::Vec2d x(a1, a2);
-    dziekan::Vec2d y = x * b1;
-    EXPECT_EQ(y.x, a1 * b1);
-    EXPECT_EQ(y.y, a2 * b1);
+    dziekan::Vector2<TypeParam> x(this->a1, this->a2);
+    dziekan::Vector2<TypeParam> y = x * this->b1;
+    EXPECT_EQ(y.x, this->a1 * this->b1);
+    EXPECT_EQ(y.y, this->a2 * this->b1);
 }
 
-TEST_F(VectorTest, testing_vec2_multiplyequals)
+TYPED_TEST(VectorTest, testing_vec2_multiplyequals)
 {
-    dziekan::Vec2d x(a1, a2);
-    x *= b1;
-    EXPECT_EQ(x.x, a1 * b1);
-    EXPECT_EQ(x.y, a2 * b1);
+    dziekan::Vector2<TypeParam> x(this->a1, this->a2);
+    x *= this->b1;
+    EXPECT_EQ(x.x, this->a1 * this->b1);
+    EXPECT_EQ(x.y, this->a2 * this->b1);
 }
 
-TEST_F(VectorTest, testing_vec3_multiply)
+TYPED_TEST(VectorTest, testing_vec3_multiply)
 {
-    dziekan::Vec3d x(a1, a2, a3);
-    dziekan::Vec3d y = x * b1;
-    EXPECT_EQ(y.x, a1 * b1);
-    EXPECT_EQ(y.y, a2 * b1);
-    EXPECT_EQ(y.z, a3 * b1);
+    dziekan::Vector3<TypeParam> x(this->a1, this->a2, this->a3);
+    dziekan::Vector3<TypeParam> y = x * this->b1;
+    EXPECT_EQ(y.x, this->a1 * this->b1);
+    EXPECT_EQ(y.y, this->a2 * this->b1);
+    EXPECT_EQ(y.z, this->a3 * this->b1);
 }
 
-TEST_F(VectorTest, testing_vec3_multiplyequals)
+TYPED_TEST(VectorTest, testing_vec3_multiplyequals)
 {
-    dziekan::Vec3d x(a1, a2, a3);
-    x *= b1;
-    EXPECT_EQ(x.x, a1 * b1);
-    EXPECT_EQ(x.y, a2 * b1);
-    EXPECT_EQ(x.z, a3 * b1);
+    dziekan::Vector3<TypeParam> x(this->a1, this->a2, this->a3);
+    x *= this->b1;
+    EXPECT_EQ(x.x, this->a1 * this->b1);
+    EXPECT_EQ(x.y, this->a2 * this->b1);
+    EXPECT_EQ(x.z, this->a3 * this->b1);
 }
 
-TEST_F(VectorTest, testing_vec4_multiply)
+TYPED_TEST(VectorTest, testing_vec4_multiply)
 {
-    dziekan::Vec4d x(a1, a2, a3, a4);
-    dziekan::Vec4d y = x * b1;
-    EXPECT_EQ(y.x, a1 * b1);
-    EXPECT_EQ(y.y, a2 * b1);
-    EXPECT_EQ(y.z, a3 * b1);
-    EXPECT_EQ(y.w, a4 * b1);
+    dziekan::Vector4<TypeParam> x(this->a1, this->a2, this->a3, this->a4);
+    dziekan::Vector4<TypeParam> y = x * this->b1;
+    EXPECT_EQ(y.x, this->a1 * this->b1);
+    EXPECT_EQ(y.y, this->a2 * this->b1);
+    EXPECT_EQ(y.z, this->a3 * this->b1);
+    EXPECT_EQ(y.w, this->a4 * this->b1);
 }
 
-TEST_F(VectorTest, testing_vec4_multiplyequals)
+TYPED_TEST(VectorTest, testing_vec4_multiplyequals)
 {
-    dziekan::Vec4d x(a1, a2, a3, a4);
-    x *= b1;
-    EXPECT_EQ(x.x, a1 * b1);
-    EXPECT_EQ(x.y, a2 * b1);
-    EXPECT_EQ(x.z, a3 * b1);
-    EXPECT_EQ(x.w, a4 * b1);
+    dziekan::Vector4<TypeParam> x(this->a1, this->a2, this->a3, this->a4);
+    x *= this->b1;
+    EXPECT_EQ(x.x, this->a1 * this->b1);
+    EXPECT_EQ(x.y, this->a2 * this->b1);
+    EXPECT_EQ(x.z, this->a3 * this->b1);
+    EXPECT_EQ(x.w, this->a4 * this->b1);
 }
 
-TEST_F(VectorTest, testing_vec2_multiplyrev)
+TYPED_TEST(VectorTest, testing_vec2_multiplyrev)
 {
-    dziekan::Vec2d x(a1, a2);
-    dziekan::Vec2d y = b1 * x;
-    EXPECT_EQ(y.x, b1 * a1);
-    EXPECT_EQ(y.y, b1 * a2);
+    dziekan::Vector2<TypeParam> x(this->a1, this->a2);
+    dziekan::Vector2<TypeParam> y = this->b1 * x;
+    EXPECT_EQ(y.x, this->b1 * this->a1);
+    EXPECT_EQ(y.y, this->b1 * this->a2);
 }
 
-TEST_F(VectorTest, testing_vec3_multiplyrev)
+TYPED_TEST(VectorTest, testing_vec3_multiplyrev)
 {
-    dziekan::Vec3d x(a1, a2, a3);
-    dziekan::Vec3d y = b1 * x;
-    EXPECT_EQ(y.x, b1 * a1);
-    EXPECT_EQ(y.y, b1 * a2);
-    EXPECT_EQ(y.z, b1 * a3);
+    dziekan::Vector3<TypeParam> x(this->a1, this->a2, this->a3);
+    dziekan::Vector3<TypeParam> y = this->b1 * x;
+    EXPECT_EQ(y.x, this->b1 * this->a1);
+    EXPECT_EQ(y.y, this->b1 * this->a2);
+    EXPECT_EQ(y.z, this->b1 * this->a3);
 }
 
-TEST_F(VectorTest, testing_vec4_multiplyrev)
+TYPED_TEST(VectorTest, testing_vec4_multiplyrev)
 {
-    dziekan::Vec4d x(a1, a2, a3, a4);
-    dziekan::Vec4d y = b1 * x;
-    EXPECT_EQ(y.x, b1 * a1);
-    EXPECT_EQ(y.y, b1 * a2);
-    EXPECT_EQ(y.z, b1 * a3);
-    EXPECT_EQ(y.w, b1 * a4);
+    dziekan::Vector4<TypeParam> x(this->a1, this->a2, this->a3, this->a4);
+    dziekan::Vector4<TypeParam> y = this->b1 * x;
+    EXPECT_EQ(y.x, this->b1 * this->a1);
+    EXPECT_EQ(y.y, this->b1 * this->a2);
+    EXPECT_EQ(y.z, this->b1 * this->a3);
+    EXPECT_EQ(y.w, this->b1 * this->a4);
 }
 
-TEST_F(VectorTest, testing_vec2_divide)
+TYPED_TEST(VectorTest, testing_vec2_divide)
 {
-    dziekan::Vec2d x(a1, a2);
-    dziekan::Vec2d y = x / b1;
-    EXPECT_EQ(y.x, a1 / b1);
-    EXPECT_EQ(y.y, a2 / b1);
+    dziekan::Vector2<TypeParam> x(this->a1, this->a2);
+    dziekan::Vector2<TypeParam> y = x / this->b1;
+    EXPECT_EQ(y.x, this->a1 / this->b1);
+    EXPECT_EQ(y.y, this->a2 / this->b1);
 }
 
-TEST_F(VectorTest, testing_vec2_divideequals)
+TYPED_TEST(VectorTest, testing_vec2_divideequals)
 {
-    dziekan::Vec2d x(a1, a2);
-    x /= b1;
-    EXPECT_EQ(x.x, a1 / b1);
-    EXPECT_EQ(x.y, a2 / b1);
+    dziekan::Vector2<TypeParam> x(this->a1, this->a2);
+    x /= this->b1;
+    EXPECT_EQ(x.x, this->a1 / this->b1);
+    EXPECT_EQ(x.y, this->a2 / this->b1);
 }
 
-TEST_F(VectorTest, testing_vec3_divide)
+TYPED_TEST(VectorTest, testing_vec3_divide)
 {
-    dziekan::Vec3d x(a1, a2, a3);
-    dziekan::Vec3d y = x / b1;
-    EXPECT_EQ(y.x, a1 / b1);
-    EXPECT_EQ(y.y, a2 / b1);
-    EXPECT_EQ(y.z, a3 / b1);
+    dziekan::Vector3<TypeParam> x(this->a1, this->a2, this->a3);
+    dziekan::Vector3<TypeParam> y = x / this->b1;
+    EXPECT_EQ(y.x, this->a1 / this->b1);
+    EXPECT_EQ(y.y, this->a2 / this->b1);
+    EXPECT_EQ(y.z, this->a3 / this->b1);
 }
 
-TEST_F(VectorTest, testing_vec3_divideequals)
+TYPED_TEST(VectorTest, testing_vec3_divideequals)
 {
-    dziekan::Vec3d x(a1, a2, a3);
-    x /= b1;
-    EXPECT_EQ(x.x, a1 / b1);
-    EXPECT_EQ(x.y, a2 / b1);
-    EXPECT_EQ(x.z, a3 / b1);
+    dziekan::Vector3<TypeParam> x(this->a1, this->a2, this->a3);
+    x /= this->b1;
+    EXPECT_EQ(x.x, this->a1 / this->b1);
+    EXPECT_EQ(x.y, this->a2 / this->b1);
+    EXPECT_EQ(x.z, this->a3 / this->b1);
 }
 
-TEST_F(VectorTest, testing_vec4_divide)
+TYPED_TEST(VectorTest, testing_vec4_divide)
 {
-    dziekan::Vec4d x(a1, a2, a3, a4);
-    dziekan::Vec4d y = x / b1;
-    EXPECT_EQ(y.x, a1 / b1);
-    EXPECT_EQ(y.y, a2 / b1);
-    EXPECT_EQ(y.z, a3 / b1);
-    EXPECT_EQ(y.w, a4 / b1);
+    dziekan::Vector4<TypeParam> x(this->a1, this->a2, this->a3, this->a4);
+    dziekan::Vector4<TypeParam> y = x / this->b1;
+    EXPECT_EQ(y.x, this->a1 / this->b1);
+    EXPECT_EQ(y.y, this->a2 / this->b1);
+    EXPECT_EQ(y.z, this->a3 / this->b1);
+    EXPECT_EQ(y.w, this->a4 / this->b1);
 }
 
-TEST_F(VectorTest, testing_vec4_divideequals)
+TYPED_TEST(VectorTest, testing_vec4_divideequals)
 {
-    dziekan::Vec4d x(a1, a2, a3, a4);
-    x /= b1;
-    EXPECT_EQ(x.x, a1 / b1);
-    EXPECT_EQ(x.y, a2 / b1);
-    EXPECT_EQ(x.z, a3 / b1);
-    EXPECT_EQ(x.w, a4 / b1);
+    dziekan::Vector4<TypeParam> x(this->a1, this->a2, this->a3, this->a4);
+    x /= this->b1;
+    EXPECT_EQ(x.x, this->a1 / this->b1);
+    EXPECT_EQ(x.y, this->a2 / this->b1);
+    EXPECT_EQ(x.z, this->a3 / this->b1);
+    EXPECT_EQ(x.w, this->a4 / this->b1);
+}
+
+TYPED_TEST(VectorTest, testing_vec2_unaryminus)
+{
+    dziekan::Vector2<TypeParam> x(this->a1, this->a2);
+    x = -x;
+    EXPECT_EQ(x.x, -this->a1);
+    EXPECT_EQ(x.y, -this->a2);
+}
+
+TYPED_TEST(VectorTest, testing_vec3_unaryminus)
+{
+    dziekan::Vector3<TypeParam> x(this->a1, this->a2, this->a3);
+    x = -x;
+    EXPECT_EQ(x.x, -this->a1);
+    EXPECT_EQ(x.y, -this->a2);
+    EXPECT_EQ(x.z, -this->a3);
+}
+
+TYPED_TEST(VectorTest, testing_vec4_unaryminus)
+{
+    dziekan::Vector4<TypeParam> x(this->a1, this->a2, this->a3, this->a4);
+    x = -x;
+    EXPECT_EQ(x.x, -this->a1);
+    EXPECT_EQ(x.y, -this->a2);
+    EXPECT_EQ(x.z, -this->a3);
+    EXPECT_EQ(x.w, -this->a4);
+}
+
+TYPED_TEST(VectorTest, testing_vec2_equals)
+{
+    dziekan::Vector2<TypeParam> x(this->a1, this->a2);
+    dziekan::Vector2<TypeParam> y(this->a3, this->a4);
+    dziekan::Vector2<TypeParam> z(this->a1, this->a2);
+    EXPECT_TRUE(x==z);
+    EXPECT_FALSE(x==y);
+}
+int main (int argc, char *argv[])
+{
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }

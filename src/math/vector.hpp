@@ -28,7 +28,7 @@ namespace dziekan{
         inline T magnitude_sqr() const { return x * x + y * y; }
         inline T dot_product(const Vector2 &rhs) const { return x * rhs.x + y * rhs.y; }
         inline Vector2<T> normalized() const { return Vector2<T>(x/Vector2<T>::mag(), y/Vector2<T>::mag()); }
-        inline Vector2<T> perp() const { return Vector2<T>(-y, x); }
+        inline Vector2<T> perpendicular() const { return Vector2<T>(-y, x); }
     };
 
 
