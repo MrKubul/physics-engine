@@ -63,6 +63,8 @@ namespace dziekan{
         inline Vec4<T> norm() const { return Vec4<T>(x/Vec4<T>::mag(), y/Vec4<T>::mag(), z/Vec4<T>::mag(), w/Vec4<T>::mag()); }
     };
 
+
+    // Helpful type definitions
     typedef Vec2<int> Vec2i;
     typedef Vec2<double> Vec2d;
     typedef Vec2<float> Vec2f;
@@ -74,4 +76,221 @@ namespace dziekan{
     typedef Vec4<int> Vec4i;
     typedef Vec4<double> Vec4d;
     typedef Vec4<float> Vec4f;
+
+
+    // ADDITION (a + b)
+    template<arithmetic T>
+    Vec2<T> operator+(const Vec2<T> &lhs, const Vec2<T> &rhs)
+    { 
+        return Vec2(lhs.x + rhs.x, lhs.y + rhs.y);
+    }
+    template<arithmetic T>
+    Vec3<T> operator+(const Vec3<T> &lhs, const Vec3<T> &rhs)
+    { 
+        return Vec3(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z);
+    }
+    template<arithmetic T>
+    Vec4<T> operator+(const Vec4<T> &lhs, const Vec4<T> &rhs)
+    { 
+        return Vec4(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z, lhs.w + rhs.w);
+    }
+
+
+    // SUBTRACTION (a - b)
+    template<arithmetic T>
+    Vec2<T> operator-(const Vec2<T> &lhs, const Vec2<T> &rhs)
+    { 
+        return Vec2(lhs.x - rhs.x, lhs.y - rhs.y);
+    }
+    template<arithmetic T>
+    Vec3<T> operator-(const Vec3<T> &lhs, const Vec3<T> &rhs)
+    { 
+        return Vec3(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z);
+    }
+    template<arithmetic T>
+    Vec4<T> operator-(const Vec4<T> &lhs, const Vec4<T> &rhs)
+    { 
+        return Vec4(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z, lhs.w - rhs.w);
+    }
+
+
+    // PLUS_EQUALS (a += b)
+    template<arithmetic T>
+    Vec2<T>& operator+=(Vec2<T> &lhs, const Vec2<T> &rhs)
+    {
+        lhs.x += rhs.x;
+        lhs.y += rhs.y;
+        return lhs;
+    }
+    template<arithmetic T>
+    Vec3<T>& operator+=(Vec3<T> &lhs, const Vec3<T> &rhs)
+    { 
+        lhs.x += rhs.x;
+        lhs.y += rhs.y;
+        lhs.z += rhs.z;
+        return lhs;
+    }
+    template<arithmetic T>
+    Vec4<T>& operator+=(Vec4<T> &lhs, const Vec4<T> &rhs)
+    { 
+        lhs.x += rhs.x;
+        lhs.y += rhs.y;
+        lhs.z += rhs.z;
+        lhs.w += rhs.w;
+        return lhs;
+    }
+
+
+    // MINUS_EQUALS (a -= b)
+    template<arithmetic T>
+    Vec2<T>& operator-=(Vec2<T> &lhs, const Vec2<T> &rhs)
+    {
+        lhs.x -= rhs.x;
+        lhs.y -= rhs.y;
+        return lhs;
+    }
+    template<arithmetic T>
+    Vec3<T>& operator-=(Vec3<T> &lhs, const Vec3<T> &rhs)
+    { 
+        lhs.x -= rhs.x;
+        lhs.y -= rhs.y;
+        lhs.z -= rhs.z;
+        return lhs;
+
+    }
+    template<arithmetic T>
+    Vec4<T>& operator-=(Vec4<T> &lhs, const Vec4<T> &rhs)
+    { 
+        lhs.x -= rhs.x;
+        lhs.y -= rhs.y;
+        lhs.z -= rhs.z;
+        lhs.w -= rhs.w;
+        return lhs;
+    }
+
+
+    // MULTIPLICATION BY A SCALAR (k * a; k ϵ arithmetic)
+    template<arithmetic T> 
+    Vec2<T> operator*(const T &lhs, const Vec2<T> &rhs) { return Vec2(lhs * rhs.x,lhs * rhs.y); }
+    template<arithmetic T> 
+    Vec3<T> operator*(const T &lhs, const Vec3<T> &rhs) { return Vec3(lhs * rhs.x,lhs * rhs.y, lhs * rhs.z); }
+    template<arithmetic T> 
+    Vec4<T> operator*(const T &lhs, const Vec4<T> &rhs) { return Vec4(lhs * rhs.x,lhs * rhs.y, lhs * rhs.z, lhs * rhs.w); }
+
+
+    // MULTIPLICATION BY A SCALAR (a * k; k ϵ arithmetic)
+    template<arithmetic T> 
+    Vec2<T> operator*(const Vec2<T> &lhs, const T &rhs) { return Vec2(lhs.x * rhs,lhs.y * rhs); }
+    template<arithmetic T> 
+    Vec3<T> operator*(const Vec3<T> &lhs, const T &rhs) { return Vec3(lhs.x * rhs,lhs.y * rhs, lhs.z * rhs); }
+    template<arithmetic T> 
+    Vec4<T> operator*(const Vec4<T> &lhs, const T& rhs) { return Vec4(lhs.x * rhs,lhs.y * rhs, lhs.z * rhs, lhs.w * rhs); }
+
+
+    // DIVISION BY A SCALAR (a / k; k ϵ arithmetic)
+    template<arithmetic T> 
+    Vec2<T> operator/(const Vec2<T> &lhs, const T &rhs) { return Vec2(lhs.x / rhs,lhs.y / rhs); }
+    template<arithmetic T> 
+    Vec3<T> operator/(const Vec3<T> &lhs, const T &rhs) { return Vec3(lhs.x / rhs,lhs.y / rhs, lhs.z / rhs); }
+    template<arithmetic T> 
+    Vec4<T> operator/(const Vec4<T> &lhs, const T& rhs) { return Vec4(lhs.x / rhs,lhs.y / rhs, lhs.z / rhs, lhs.w / rhs); }
+
+
+    // MULTIPLY_EQUALS BY A SCALAR (a *= k; k ϵ arithmetic)
+    template<arithmetic T> 
+    Vec2<T>& operator*=(Vec2<T> &lhs, const T &rhs)
+    {
+        lhs.x *= rhs;
+        lhs.y *= rhs;
+        return lhs;
+    }
+    template<arithmetic T> 
+    Vec3<T>& operator*=(Vec3<T> &lhs, const T &rhs)
+    {
+        lhs.x *= rhs;
+        lhs.y *= rhs;
+        lhs.z *= rhs;
+        return lhs;
+    }
+    template<arithmetic T> 
+    Vec4<T>& operator*=(Vec4<T> &lhs, const T& rhs)
+    {
+        lhs.x *= rhs;
+        lhs.y *= rhs;
+        lhs.z *= rhs;
+        lhs.w *= rhs;
+        return lhs;
+    }
+
+
+    // DIVIDE_EQUALS BY A SCALAR (a /= k; k ϵ arithmetic)
+    template<arithmetic T> 
+    Vec2<T>& operator/=(Vec2<T> &lhs, const T &rhs)
+    {
+        lhs.x /= rhs;
+        lhs.y /= rhs;
+        return lhs;
+
+    }
+    template<arithmetic T> 
+    Vec3<T>& operator/=(Vec3<T> &lhs, const T &rhs)
+    {
+        lhs.x /= rhs;
+        lhs.y /= rhs;
+        lhs.z /= rhs;
+        return lhs;
+
+    }
+    template<arithmetic T> 
+    Vec4<T>& operator/=(Vec4<T> &lhs, const T& rhs)
+    {
+        lhs.x /= rhs;
+        lhs.y /= rhs;
+        lhs.z /= rhs;
+        lhs.w /= rhs;
+        return lhs;
+    }
+
+
+    // EQUALS (a == b)
+    template<arithmetic T> 
+    bool operator==(const Vec2<T> &lhs, const Vec2<T> &rhs) {
+        return lhs.x == rhs.x && lhs.y == rhs.y;
+    }
+    template<arithmetic T> 
+    bool operator==(const Vec3<T> &lhs, const Vec3<T> &rhs) {
+        return lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z;
+    }
+    template<arithmetic T> 
+    bool operator==(const Vec4<T> &lhs, const Vec4<T> &rhs) {
+        return lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z && lhs.w == rhs.w;
+    }
+
+
+    // UNARY MINUS (-a)
+    template<arithmetic T> 
+    Vec2<T> operator-(const Vec2<T> &rhs) { return Vec2(-rhs.x,-rhs.y); }
+    template<arithmetic T> 
+    Vec3<T> operator-(const Vec3<T> &rhs) { return Vec3(-rhs.x, -rhs.y, -rhs.z); }
+    template<arithmetic T> 
+    Vec4<T> operator-(const Vec4<T> &rhs) { return Vec4(-rhs.x, -rhs.y, -rhs.z, -rhs.w); }
+
+
+    // OSTREAM
+    template<arithmetic T> 
+    std::ostream& operator<< (std::ostream& out, const Vec2<T> &vec)
+    {
+        return out << vec.x << " " << vec.y;
+    }
+    template<arithmetic T> 
+    std::ostream& operator<< (std::ostream& out, const Vec3<T> &vec)
+    {
+        return out << vec.x << " " << vec.y << " " << vec.z;
+    }
+    template<arithmetic T> 
+    std::ostream& operator<< (std::ostream& out, const Vec4<T> &vec)
+    {
+        return out << vec.x << " " << vec.y << " " << vec.z << " " << vec.w;
+    }
+
 }
