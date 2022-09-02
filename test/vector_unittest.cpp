@@ -1,4 +1,4 @@
-#include "../src/math/vector.hpp"
+#include "math/vector.hpp"
 #include <gtest/gtest.h>
 #include <limits>
 
@@ -359,7 +359,10 @@ TYPED_TEST(VectorTest, testing_vec4_magnitude_sqr)
 
 TYPED_TEST(VectorTest, testing_vec2_normalized)
 {
-    auto doubles_equals_lambda = [](double a, double b){return (abs(a - b) <= std::numeric_limits<double>::epsilon());};
+    auto doubles_equals_lambda = [](double a, double b)
+    {
+        return (abs(a - b) <= std::numeric_limits<double>::epsilon());
+    };
     deen::Vector2<TypeParam> x(this->a1, this->a2);
     deen::Vector2<double> y = x.normalized();
     EXPECT_TRUE(doubles_equals_lambda(y.magnitude(), 1.0));
@@ -369,7 +372,10 @@ TYPED_TEST(VectorTest, testing_vec2_normalized)
 
 TYPED_TEST(VectorTest, testing_vec3_normalized)
 {
-    auto doubles_equals_lambda = [](double a, double b){return (abs(a - b) <= std::numeric_limits<double>::epsilon());};
+    auto doubles_equals_lambda = [](double a, double b)
+    {
+        return (abs(a - b) <= std::numeric_limits<double>::epsilon());
+    };
     deen::Vector3<TypeParam> x(this->a1, this->a2, this->a3);
     deen::Vector3<double> y = x.normalized();
     EXPECT_TRUE(doubles_equals_lambda(y.magnitude(), 1.0));
@@ -380,7 +386,10 @@ TYPED_TEST(VectorTest, testing_vec3_normalized)
 
 TYPED_TEST(VectorTest, testing_vec4_normalized)
 {
-    auto doubles_equals_lambda = [](double a, double b){return (abs(a - b) <= std::numeric_limits<double>::epsilon());};
+    auto doubles_equals_lambda = [](double a, double b)
+    {
+        return (abs(a - b) <= std::numeric_limits<double>::epsilon());
+    };
     deen::Vector4<TypeParam> x(this->a1, this->a2, this->a3, this->a4);
     deen::Vector4<double> y = x.normalized();
     EXPECT_TRUE(doubles_equals_lambda(y.magnitude(), 1.0));
@@ -396,10 +405,4 @@ TYPED_TEST(VectorTest, testing_vec2_perpendicular)
     deen::Vector2<TypeParam> y = x.perpendicular();
     EXPECT_EQ(y.x, -this->a2);
     EXPECT_EQ(y.y, this->a1);
-}
-
-int main (int argc, char *argv[])
-{
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
 }
