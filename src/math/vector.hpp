@@ -5,7 +5,6 @@
 #include <ostream>
 
 namespace deen{
-    // Concept encapsulating all numbers (floats, doubles, ints, long longs, etc)
     template<typename T>
     concept arithmetic = std::is_arithmetic_v<T>;
 
@@ -27,7 +26,7 @@ namespace deen{
 
         inline T magnitude_sqr() const { return x * x + y * y; }
         inline T dot_product(const Vector2 &rhs) const { return x * rhs.x + y * rhs.y; }
-        inline Vector2<T> normalized() const { return Vector2<T>(x/Vector2<T>::mag(), y/Vector2<T>::mag()); }
+        inline Vector2<T> normalized() const { return Vector2<T>(x/Vector2<T>::magnitude(), y/Vector2<T>::magnitude()); }
         inline Vector2<T> perpendicular() const { return Vector2<T>(-y, x); }
     };
 
@@ -44,7 +43,7 @@ namespace deen{
 
         inline T magnitude_sqr() const { return x * x + y * y + z * z; }
         inline T dot_product(const Vector3<T> &rhs) const { return x * rhs.x + y * rhs.y + z * rhs.z; }
-        inline Vector3<T> normalized() const { return Vector3<T>(x/Vector3<T>::mag(), y/Vector3<T>::mag(), z/Vector3<T>::mag()); }
+        inline Vector3<T> normalized() const { return Vector3<T>(x/Vector3<T>::magnitude(), y/Vector3<T>::magnitude(), z/Vector3<T>::magnitude()); }
     };
 
 
@@ -61,11 +60,10 @@ namespace deen{
 
         inline T magnitude_sqr() const {return x * x + y * y + z * z + w * w; }
         inline T dot_product(const Vector4<T> &rhs) const { return x * rhs.x + y * rhs.y + z * rhs.z + w * rhs.w; }
-        inline Vector4<T> normalized() const { return Vector4<T>(x/Vector4<T>::mag(), y/Vector4<T>::mag(), z/Vector4<T>::mag(), w/Vector4<T>::mag()); }
+        inline Vector4<T> normalized() const { return Vector4<T>(x/Vector4<T>::magnitude(), y/Vector4<T>::magnitude(), z/Vector4<T>::magnitude(), w/Vector4<T>::magnitude()); }
     };
 
 
-    // Helpful type definitions
     typedef Vector2<int> Vec2i;
     typedef Vector2<double> Vec2d;
     typedef Vector2<float> Vec2f;
@@ -79,7 +77,6 @@ namespace deen{
     typedef Vector4<float> Vec4f;
 
 
-    // ADDITION (a + b)
     template<arithmetic T>
     Vector2<T> operator+(const Vector2<T> &lhs, const Vector2<T> &rhs)
     { 
@@ -97,7 +94,6 @@ namespace deen{
     }
 
 
-    // SUBTRACTION (a - b)
     template<arithmetic T>
     Vector2<T> operator-(const Vector2<T> &lhs, const Vector2<T> &rhs)
     { 
@@ -115,7 +111,6 @@ namespace deen{
     }
 
 
-    // PLUS_EQUALS (a += b)
     template<arithmetic T>
     Vector2<T>& operator+=(Vector2<T> &lhs, const Vector2<T> &rhs)
     {
@@ -142,7 +137,6 @@ namespace deen{
     }
 
 
-    // MINUS_EQUALS (a -= b)
     template<arithmetic T>
     Vector2<T>& operator-=(Vector2<T> &lhs, const Vector2<T> &rhs)
     {
@@ -170,7 +164,6 @@ namespace deen{
     }
 
 
-    // MULTIPLICATION BY A SCALAR (k * a; k ϵ arithmetic)
     template<arithmetic T> 
     Vector2<T> operator*(const T &lhs, const Vector2<T> &rhs) { return Vector2(lhs * rhs.x,lhs * rhs.y); }
     template<arithmetic T> 
@@ -179,7 +172,6 @@ namespace deen{
     Vector4<T> operator*(const T &lhs, const Vector4<T> &rhs) { return Vector4(lhs * rhs.x,lhs * rhs.y, lhs * rhs.z, lhs * rhs.w); }
 
 
-    // MULTIPLICATION BY A SCALAR (a * k; k ϵ arithmetic)
     template<arithmetic T> 
     Vector2<T> operator*(const Vector2<T> &lhs, const T &rhs) { return Vector2(lhs.x * rhs,lhs.y * rhs); }
     template<arithmetic T> 
@@ -188,7 +180,6 @@ namespace deen{
     Vector4<T> operator*(const Vector4<T> &lhs, const T& rhs) { return Vector4(lhs.x * rhs,lhs.y * rhs, lhs.z * rhs, lhs.w * rhs); }
 
 
-    // DIVISION BY A SCALAR (a / k; k ϵ arithmetic)
     template<arithmetic T> 
     Vector2<T> operator/(const Vector2<T> &lhs, const T &rhs) { return Vector2(lhs.x / rhs,lhs.y / rhs); }
     template<arithmetic T> 
@@ -197,7 +188,6 @@ namespace deen{
     Vector4<T> operator/(const Vector4<T> &lhs, const T& rhs) { return Vector4(lhs.x / rhs,lhs.y / rhs, lhs.z / rhs, lhs.w / rhs); }
 
 
-    // MULTIPLY_EQUALS BY A SCALAR (a *= k; k ϵ arithmetic)
     template<arithmetic T> 
     Vector2<T>& operator*=(Vector2<T> &lhs, const T &rhs)
     {
@@ -224,7 +214,6 @@ namespace deen{
     }
 
 
-    // DIVIDE_EQUALS BY A SCALAR (a /= k; k ϵ arithmetic)
     template<arithmetic T> 
     Vector2<T>& operator/=(Vector2<T> &lhs, const T &rhs)
     {
@@ -253,7 +242,6 @@ namespace deen{
     }
 
 
-    // EQUALS (a == b)
     template<arithmetic T> 
     bool operator==(const Vector2<T> &lhs, const Vector2<T> &rhs) {
         return lhs.x == rhs.x && lhs.y == rhs.y;
@@ -268,7 +256,6 @@ namespace deen{
     }
 
 
-    // UNARY MINUS (-a)
     template<arithmetic T> 
     Vector2<T> operator-(const Vector2<T> &rhs) { return Vector2(-rhs.x,-rhs.y); }
     template<arithmetic T> 
@@ -277,7 +264,6 @@ namespace deen{
     Vector4<T> operator-(const Vector4<T> &rhs) { return Vector4(-rhs.x, -rhs.y, -rhs.z, -rhs.w); }
 
 
-    // OSTREAM
     template<arithmetic T> 
     std::ostream& operator<< (std::ostream& out, const Vector2<T> &vec)
     {

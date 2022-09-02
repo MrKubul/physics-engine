@@ -296,3 +296,98 @@ TYPED_TEST(VectorTest, testing_vec2_equals)
     EXPECT_TRUE(x==z);
     EXPECT_FALSE(x==y);
 }
+
+TYPED_TEST(VectorTest, testing_vec2_dot_product)
+{
+    deen::Vector2<TypeParam> x(this->a1, this->a2);
+    deen::Vector2<TypeParam> y(this->b1, this->b2);
+    EXPECT_EQ(x.dot_product(y), this->a1 * this->b1 + this->a2 * this->b2);
+}
+
+TYPED_TEST(VectorTest, testing_vec3_dot_product)
+{
+    deen::Vector3<TypeParam> x(this->a1, this->a2, this->a3);
+    deen::Vector3<TypeParam> y(this->b1, this->b2, this->b3);
+    EXPECT_EQ(x.dot_product(y), this->a1 * this->b1 + this->a2 * this->b2 + this->a3 * this->b3);
+}
+
+TYPED_TEST(VectorTest, testing_vec4_dot_product)
+{
+    deen::Vector4<TypeParam> x(this->a1, this->a2, this->a3, this->a4);
+    deen::Vector4<TypeParam> y(this->b1, this->b2, this->b3, this->b4);
+    EXPECT_EQ(x.dot_product(y), this->a1 * this->b1 + this->a2 * this->b2 + this->a3 * this->b3 + this->a4 * this->b4);
+}
+
+TYPED_TEST(VectorTest, testing_vec2_magnitude)
+{
+    deen::Vector2<TypeParam> x(this->a1, this->a2);
+    EXPECT_EQ(x.magnitude(), (TypeParam)std::sqrt(this->a1 * this->a1 + this->a2 * this->a2));
+}
+
+TYPED_TEST(VectorTest, testing_vec3_magnitude)
+{
+    deen::Vector3<TypeParam> x(this->a1, this->a2, this->a3);
+    EXPECT_EQ(x.magnitude(), (TypeParam)std::sqrt(this->a1 * this->a1 + this->a2 * this->a2 + this->a3 * this->a3));
+}
+
+TYPED_TEST(VectorTest, testing_vec4_magnitude)
+{
+    deen::Vector4<TypeParam> x(this->a1, this->a2, this->a3, this->a4);
+    EXPECT_EQ(x.magnitude(), (TypeParam)std::sqrt(this->a1 * this->a1 + this->a2 * this->a2 + this->a3 * this->a3 + this->a4 * this->a4));
+}
+
+TYPED_TEST(VectorTest, testing_vec2_magnitude_sqr)
+{
+    deen::Vector2<TypeParam> x(this->a1, this->a2);
+    EXPECT_EQ(x.magnitude_sqr(), this->a1 * this->a1 + this->a2 * this->a2);
+}
+
+TYPED_TEST(VectorTest, testing_vec3_magnitude_sqr)
+{
+    deen::Vector3<TypeParam> x(this->a1, this->a2, this->a3);
+    EXPECT_EQ(x.magnitude_sqr(), this->a1 * this->a1 + this->a2 * this->a2 + this->a3 * this->a3);
+}
+
+TYPED_TEST(VectorTest, testing_vec4_magnitude_sqr)
+{
+    deen::Vector4<TypeParam> x(this->a1, this->a2, this->a3, this->a4);
+    EXPECT_EQ(x.magnitude_sqr(), this->a1 * this->a1 + this->a2 * this->a2 + this->a3 * this->a3 + this->a4 * this->a4);
+}
+
+TYPED_TEST(VectorTest, testing_vec2_normalized)
+{
+    deen::Vector2<TypeParam> x(this->a1, this->a2);
+    deen::Vector2<TypeParam> y = x.normalized();
+    // EXPECT_EQ(y.magnitude(), (TypeParam)1);
+    EXPECT_EQ(x.x / x.magnitude(), this->a1 / x.magnitude());
+    EXPECT_EQ(x.y / x.magnitude(), this->a2 / x.magnitude());
+}
+
+TYPED_TEST(VectorTest, testing_vec3_normalized)
+{
+    deen::Vector3<TypeParam> x(this->a1, this->a2, this->a3);
+    deen::Vector3<TypeParam> y = x.normalized();
+    // EXPECT_EQ(y.magnitude(), (TypeParam)1);
+    EXPECT_EQ(x.x / x.magnitude(), this->a1 / x.magnitude());
+    EXPECT_EQ(x.y / x.magnitude(), this->a2 / x.magnitude());
+    EXPECT_EQ(x.z / x.magnitude(), this->a3 / x.magnitude());
+}
+
+TYPED_TEST(VectorTest, testing_vec4_normalized)
+{
+    deen::Vector4<TypeParam> x(this->a1, this->a2, this->a3, this->a4);
+    deen::Vector4<TypeParam> y = x.normalized();
+    // EXPECT_EQ(y.magnitude(), (TypeParam)1);
+    EXPECT_EQ(x.x / x.magnitude(), this->a1 / x.magnitude());
+    EXPECT_EQ(x.y / x.magnitude(), this->a2 / x.magnitude());
+    EXPECT_EQ(x.z / x.magnitude(), this->a3 / x.magnitude());
+    EXPECT_EQ(x.w / x.magnitude(), this->a4 / x.magnitude());
+}
+
+TYPED_TEST(VectorTest, testing_vec2_perpendicular)
+{
+    deen::Vector2<TypeParam> x(this->a1, this->a2);
+    deen::Vector2<TypeParam> y = x.perpendicular();
+    EXPECT_EQ(y.x, -this->a2);
+    EXPECT_EQ(y.y, this->a1);
+}
