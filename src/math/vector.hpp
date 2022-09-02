@@ -9,30 +9,24 @@ namespace deen{
     concept arithmetic = std::is_arithmetic_v<T>;
 
 
-    template<arithmetic T>
-    struct BaseVector{
-        inline virtual T magnitude_sqr() const = 0;
-        inline T magnitude() const { return std::sqrt(magnitude_sqr()); };
-    };
-
-
     template<arithmetic T = double>
-    struct Vector2 : public BaseVector<T>
+    struct Vector2
     {
         inline Vector2() : x(0), y(0) {}
         inline Vector2(T a, T b) : x(a), y(b) {}
         T x;
         T y;
 
-        inline T magnitude_sqr() const { return x * x + y * y; }
+        inline double magnitude_sqr() const { return x * x + y * y; }
+        inline double magnitude() const { return std::sqrt(magnitude_sqr()); }
         inline T dot_product(const Vector2 &rhs) const { return x * rhs.x + y * rhs.y; }
-        inline Vector2<T> normalized() const { return Vector2<T>(x/Vector2<T>::magnitude(), y/Vector2<T>::magnitude()); }
+        inline Vector2<double> normalized() const { return Vector2<double>(x/Vector2<T>::magnitude(), y/Vector2<T>::magnitude()); }
         inline Vector2<T> perpendicular() const { return Vector2<T>(-y, x); }
     };
 
 
     template<arithmetic T>
-    struct Vector3 : public BaseVector<T>
+    struct Vector3
     {
         inline Vector3() : x(0), y(0), z(0) {}
         inline Vector3(T a, T b, T c) : x(a), y(b), z(c) {}
@@ -41,14 +35,15 @@ namespace deen{
         T y;
         T z;
 
-        inline T magnitude_sqr() const { return x * x + y * y + z * z; }
+        inline double magnitude_sqr() const { return x * x + y * y + z * z; }
+        inline double magnitude() const { return std::sqrt(magnitude_sqr()); }
         inline T dot_product(const Vector3<T> &rhs) const { return x * rhs.x + y * rhs.y + z * rhs.z; }
-        inline Vector3<T> normalized() const { return Vector3<T>(x/Vector3<T>::magnitude(), y/Vector3<T>::magnitude(), z/Vector3<T>::magnitude()); }
+        inline Vector3<double> normalized() const { return Vector3<double>(x/Vector3<T>::magnitude(), y/Vector3<T>::magnitude(), z/Vector3<T>::magnitude()); }
     };
 
 
     template<arithmetic T>
-    struct Vector4 : public BaseVector<T>
+    struct Vector4
     {
         inline Vector4() : x(0), y(0), z(0), w(0) {}
         inline Vector4(T a, T b, T c, T d) : x(a), y(b), z(c), w(d) {}
@@ -58,9 +53,10 @@ namespace deen{
         T z;
         T w;
 
-        inline T magnitude_sqr() const {return x * x + y * y + z * z + w * w; }
+        inline double magnitude_sqr() const {return x * x + y * y + z * z + w * w; }
+        inline double magnitude() const { return std::sqrt(magnitude_sqr()); }
         inline T dot_product(const Vector4<T> &rhs) const { return x * rhs.x + y * rhs.y + z * rhs.z + w * rhs.w; }
-        inline Vector4<T> normalized() const { return Vector4<T>(x/Vector4<T>::magnitude(), y/Vector4<T>::magnitude(), z/Vector4<T>::magnitude(), w/Vector4<T>::magnitude()); }
+        inline Vector4<double> normalized() const { return Vector4<double>(x/Vector4<T>::magnitude(), y/Vector4<T>::magnitude(), z/Vector4<T>::magnitude(), w/Vector4<T>::magnitude()); }
     };
 
 

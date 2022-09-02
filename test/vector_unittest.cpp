@@ -1,5 +1,6 @@
-#include "math/vector.hpp"
+#include "../src/math/vector.hpp"
 #include <gtest/gtest.h>
+#include <limits>
 
 using vector_types_to_test = testing::Types<int, double, long long>;
 
@@ -321,19 +322,19 @@ TYPED_TEST(VectorTest, testing_vec4_dot_product)
 TYPED_TEST(VectorTest, testing_vec2_magnitude)
 {
     deen::Vector2<TypeParam> x(this->a1, this->a2);
-    EXPECT_EQ(x.magnitude(), (TypeParam)std::sqrt(this->a1 * this->a1 + this->a2 * this->a2));
+    EXPECT_EQ(x.magnitude(), std::sqrt(this->a1 * this->a1 + this->a2 * this->a2));
 }
 
 TYPED_TEST(VectorTest, testing_vec3_magnitude)
 {
     deen::Vector3<TypeParam> x(this->a1, this->a2, this->a3);
-    EXPECT_EQ(x.magnitude(), (TypeParam)std::sqrt(this->a1 * this->a1 + this->a2 * this->a2 + this->a3 * this->a3));
+    EXPECT_EQ(x.magnitude(), std::sqrt(this->a1 * this->a1 + this->a2 * this->a2 + this->a3 * this->a3));
 }
 
 TYPED_TEST(VectorTest, testing_vec4_magnitude)
 {
     deen::Vector4<TypeParam> x(this->a1, this->a2, this->a3, this->a4);
-    EXPECT_EQ(x.magnitude(), (TypeParam)std::sqrt(this->a1 * this->a1 + this->a2 * this->a2 + this->a3 * this->a3 + this->a4 * this->a4));
+    EXPECT_EQ(x.magnitude(), std::sqrt(this->a1 * this->a1 + this->a2 * this->a2 + this->a3 * this->a3 + this->a4 * this->a4));
 }
 
 TYPED_TEST(VectorTest, testing_vec2_magnitude_sqr)
@@ -354,20 +355,24 @@ TYPED_TEST(VectorTest, testing_vec4_magnitude_sqr)
     EXPECT_EQ(x.magnitude_sqr(), this->a1 * this->a1 + this->a2 * this->a2 + this->a3 * this->a3 + this->a4 * this->a4);
 }
 
+
+
 TYPED_TEST(VectorTest, testing_vec2_normalized)
 {
+    auto doubles_equals_lambda = [](double a, double b){return (abs(a - b) <= std::numeric_limits<double>::epsilon());};
     deen::Vector2<TypeParam> x(this->a1, this->a2);
-    deen::Vector2<TypeParam> y = x.normalized();
-    // EXPECT_EQ(y.magnitude(), (TypeParam)1);
+    deen::Vector2<double> y = x.normalized();
+    EXPECT_TRUE(doubles_equals_lambda(y.magnitude(), 1.0));
     EXPECT_EQ(x.x / x.magnitude(), this->a1 / x.magnitude());
     EXPECT_EQ(x.y / x.magnitude(), this->a2 / x.magnitude());
 }
 
 TYPED_TEST(VectorTest, testing_vec3_normalized)
 {
+    auto doubles_equals_lambda = [](double a, double b){return (abs(a - b) <= std::numeric_limits<double>::epsilon());};
     deen::Vector3<TypeParam> x(this->a1, this->a2, this->a3);
-    deen::Vector3<TypeParam> y = x.normalized();
-    // EXPECT_EQ(y.magnitude(), (TypeParam)1);
+    deen::Vector3<double> y = x.normalized();
+    EXPECT_TRUE(doubles_equals_lambda(y.magnitude(), 1.0));
     EXPECT_EQ(x.x / x.magnitude(), this->a1 / x.magnitude());
     EXPECT_EQ(x.y / x.magnitude(), this->a2 / x.magnitude());
     EXPECT_EQ(x.z / x.magnitude(), this->a3 / x.magnitude());
@@ -375,9 +380,10 @@ TYPED_TEST(VectorTest, testing_vec3_normalized)
 
 TYPED_TEST(VectorTest, testing_vec4_normalized)
 {
+    auto doubles_equals_lambda = [](double a, double b){return (abs(a - b) <= std::numeric_limits<double>::epsilon());};
     deen::Vector4<TypeParam> x(this->a1, this->a2, this->a3, this->a4);
-    deen::Vector4<TypeParam> y = x.normalized();
-    // EXPECT_EQ(y.magnitude(), (TypeParam)1);
+    deen::Vector4<double> y = x.normalized();
+    EXPECT_TRUE(doubles_equals_lambda(y.magnitude(), 1.0));
     EXPECT_EQ(x.x / x.magnitude(), this->a1 / x.magnitude());
     EXPECT_EQ(x.y / x.magnitude(), this->a2 / x.magnitude());
     EXPECT_EQ(x.z / x.magnitude(), this->a3 / x.magnitude());
@@ -390,4 +396,10 @@ TYPED_TEST(VectorTest, testing_vec2_perpendicular)
     deen::Vector2<TypeParam> y = x.perpendicular();
     EXPECT_EQ(y.x, -this->a2);
     EXPECT_EQ(y.y, this->a1);
+}
+
+int main (int argc, char *argv[])
+{
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }
