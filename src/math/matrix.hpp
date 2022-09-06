@@ -40,35 +40,40 @@ namespace deengine {
     }
 
     template<arithmetic T, uint16_t rowNumber, uint16_t columnNumber>
-    Matrix T operator+(const &Matrix<T>){
-        return getValue(targetRow, targetColumn);
+    Matrix T operator+(const &Matrix<T> toAdd){
+        // assert equal dimensions
+        for(int i = 0; i < rowNumber * columnNumber; ++i)
+        {
+            values[i] += toAdd[i];
+        }
+        return *this;
     }
 
     template<arithmetic T, uint16_t rowNumber, uint16_t columnNumber>
-    Matrix T operator-(uint16_t targetRow, uint16_t targetColumn){
-        return getValue(targetRow, targetColumn);
+    Matrix T operator-(const &Matrix<T> toAdd){
+        // assert equal dimensions
+        for(int i = 0; i < rowNumber * columnNumber; ++i)
+        {
+            values[i] -= toAdd[i];
+        }
+        return *this;
     }
 
-    Matrix T operator+=(uint16_t targetRow, uint16_t targetColumn){
-        return getValue(targetRow, targetColumn);
+    template<arithmetic T, uint16_t rowNumber, uint16_t columnNumber>
+    Matrix T operator*(const int scalar){
+        for(int i = 0; i < rowNumber * columnNumber; ++i)
+        {
+            values[i] *= scalar;
+        }
+        return *this;
     }
 
-    Matrix T operator-=(uint16_t targetRow, uint16_t targetColumn){
-        return getValue(targetRow, targetColumn);
+    template<arithmetic T, uint16_t rowNumber, uint16_t columnNumber>
+    Matrix T operator/(const int scalar){
+                for(int i = 0; i < rowNumber * columnNumber; ++i)
+        {
+            values[i] *= scalar;
+        }
+        return *this;
     }
-
-    Matrix T operator*(uint16_t targetRow, uint16_t targetColumn){
-        return getValue(targetRow, targetColumn);
-    }
-
-    Matrix T operator/(uint16_t targetRow, uint16_t targetColumn){
-        return getValue(targetRow, targetColumn);
-    }
-
-    template<arithmetic T, uint16_t rowNumber, uint16_t colcolumnNumberumns>
-    T Matrix::getValue(uint16_t targetRow, uint16_t targetColumn) const
-    {
-        return values[targetRow * rowNumber + targetColumn];
-    }
-
 }
